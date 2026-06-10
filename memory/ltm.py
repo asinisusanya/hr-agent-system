@@ -29,7 +29,7 @@ def save_ltm(
         f"LTM Score for '{message}': {score}"
     )
 
-    if score < 0.4:
+    if score < 0.5:
         return
 
     db = SessionLocal()

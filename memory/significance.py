@@ -1,14 +1,21 @@
-IMPORTANT_WORDS = [
-    "always",
+PREFERENCE_WORDS = [
     "prefer",
-    "important",
-    "remember",
-    "never",
+    "preferred",
     "usually",
+    "always",
     "typically",
-    "like",
+    "favorite",
     "dislike",
-    "favorite"
+    "never"
+]
+
+LONG_TERM_PATTERNS = [
+    "i prefer",
+    "i usually",
+    "i always",
+    "my preferred",
+    "my favorite",
+    "i dislike"
 ]
 
 
@@ -16,26 +23,30 @@ def calculate_significance(
     message: str
 ) -> float:
     """
-    Calculate significance score for
-    long-term memory storage.
+    Calculate significance score
+    for long-term memory storage.
 
-    Preference-related statements receive
-    higher scores.
-
-    Args:
-        message: User request.
+    Scores are based on whether
+    the message contains persistent
+    preferences, habits, or recurring
+    user characteristics.
 
     Returns:
-        Significance score between 0.0 and 1.0.
+        Score between 0.0 and 1.0
     """
-
-    score = 0.2
 
     text = message.lower()
 
-    for word in IMPORTANT_WORDS:
+    score = 0.0
+
+    for pattern in LONG_TERM_PATTERNS:
+
+        if pattern in text:
+            score += 0.5
+
+    for word in PREFERENCE_WORDS:
 
         if word in text:
-            score += 0.3
+            score += 0.1
 
     return min(score, 1.0)

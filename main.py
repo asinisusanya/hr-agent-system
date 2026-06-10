@@ -159,14 +159,33 @@ def get_audit() -> list:
     audit_data = []
 
     for log in logs:
+        # audit_data.append(
+        #     {
+        #         "user_id": log.user_id,
+        #         "request": log.request,
+        #         "intent": log.intent,
+        #         "confidence": log.confidence,
+        #         "agent": log.agent,
+        #         "response": log.response,
+        #         "status": log.status
+        #     }
+        # )
         audit_data.append(
             {
+                "id": log.id,
+                "timestamp": log.timestamp,
+
                 "user_id": log.user_id,
+
                 "request": log.request,
+
                 "intent": log.intent,
                 "confidence": log.confidence,
+
                 "agent": log.agent,
+
                 "response": log.response,
+
                 "status": log.status
             }
         )
